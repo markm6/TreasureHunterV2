@@ -130,7 +130,7 @@ public class Hunter {
 
         for (String item : kit) {
             if (item != null) {
-                printableKit += item + space;
+                printableKit += item + ", " + space;
             }
         }
         printableKit += Colors.RESET;

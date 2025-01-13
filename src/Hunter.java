@@ -148,6 +148,14 @@ public class Hunter {
     }
 
     /**
+     * Populates kit with all items obtainable from the shop.
+     * Should only be called when initiating test mode.
+     */
+    public void addTestKit() {
+        kit = new String[]{"water", "rope", "machete", "horse", "boat"};
+    }
+
+    /**
      * Searches kit Array for the index of the specified value.
      *
      * @param item String to look for.

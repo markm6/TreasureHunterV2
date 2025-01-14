@@ -94,9 +94,18 @@ public class TreasureHunter {
      * The choice is sent to the processChoice() method for parsing.<p>
      * This method will loop until the user chooses to exit.
      */
-    private void showMenu() {
+
+    public void done(){
+        System.out.println("Game Over!!!");
+    }
+
+    public void showMenu() {
         String choice = "";
         while (!choice.equals("x")) {
+            if (hunter.getGold() < 0){
+                done();
+                break;
+            }
             System.out.println();
             System.out.println(currentTown.getLatestNews());
             System.out.println("***");

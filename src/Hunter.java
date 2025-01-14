@@ -29,6 +29,10 @@ public class Hunter {
         return hunterName;
     }
 
+    public int getGold() {
+        return gold;
+    }
+
     /**
      * Updates the amount of gold the hunter has.
      *
@@ -36,9 +40,6 @@ public class Hunter {
      */
     public void changeGold(int modifier) {
         gold += modifier;
-        if (gold < 0) {
-            gold = 0;
-        }
     }
 
     /**

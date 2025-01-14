@@ -11,6 +11,8 @@ public class Town {
     private Terrain terrain;
     private String printMessage;
     private boolean toughTown;
+    private String treasure;
+    private boolean treasureSearched;
 
     /**
      * The Town Constructor takes in a shop and the surrounding terrain, but leaves the hunter as null until one arrives.
@@ -29,6 +31,20 @@ public class Town {
 
         // higher toughness = more likely to be a tough town
         toughTown = (Math.random() < toughness);
+
+        treasureSearched = false;
+
+        // 25% chance for a given treasure to be chosen.
+        int treasureNum = ((int) (Math.random() * 4));
+        if (treasureNum == 0) {
+            treasure = "crown";
+        } else if (treasureNum == 1) {
+            treasure = "trophy";
+        } else if (treasureNum == 2) {
+            treasure = "gem";
+        } else {
+            treasure = "dust";
+        }
     }
 
     public Terrain getTerrain() {
@@ -51,6 +67,23 @@ public class Town {
             printMessage += "\nIt's pretty rough around here, so watch yourself.";
         } else {
             printMessage += "\nWe're just a sleepy little town with mild mannered folk.";
+        }
+    }
+
+    public void huntForTreasure() {
+        if (treasureSearched) {
+            printMessage = "You have already searched this town.";
+        } else {
+            if (treasure.equals("dust")) {
+                printMessage = "You found dust. It was not added to your treasures.";
+            } else {
+                if (hunter.addTreasure(treasure)) {
+                    printMessage = "You found " + treasure + " and it was added to your treasures!";
+                } else {
+                    printMessage = "You found " + treasure + " but it was already in your inventory of treasures.";
+                }
+            }
+            treasureSearched = true;
         }
     }
 

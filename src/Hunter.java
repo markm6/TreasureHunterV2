@@ -8,6 +8,7 @@ public class Hunter {
     //instance variables
     private String hunterName;
     private String[] kit;
+    private String[] treasures;
     private int gold;
 
     /**
@@ -19,6 +20,7 @@ public class Hunter {
     public Hunter(String hunterName, int startingGold) {
         this.hunterName = hunterName;
         kit = new String[5]; // only 5 possible items can be stored in kit
+        treasures = new String[3]; // 3 required treasures to collect
         gold = startingGold;
     }
 
@@ -73,6 +75,21 @@ public class Hunter {
     }
 
     /**
+     * Attempts to add a treasure to the treasure Array
+     * @return If the hunter successfully collected the treasure.
+     * False if treasure is in treasures Array already
+     * or treasures Array is full, else true.
+     */
+    public boolean addTreasure(String treasure) {
+        int pos = emptyPositionInTreasures();
+        if (!hasTreasure(treasure)) {
+            treasures[pos] = treasure;
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Removes an item from the kit by setting the index of the item to null.
      *
      * @param item The item to be removed.
@@ -102,6 +119,8 @@ public class Hunter {
         return false;
     }
 
+
+
     /**
      * Checks if the kit Array has the specified item.
      *
@@ -111,6 +130,22 @@ public class Hunter {
     public boolean hasItemInKit(String item) {
         for (String tmpItem : kit) {
             if (item.equals(tmpItem)) {
+                // early return
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Checks if the treasure Array has the specified item.
+     *
+     * @param treasure The search item
+     * @return true if the treasure is found.
+     */
+    public boolean hasTreasure(String treasure) {
+        for (String t : treasures) {
+            if (treasure.equals(t)) {
                 // early return
                 return true;
             }
@@ -188,7 +223,7 @@ public class Hunter {
     }
 
     /**
-     * Finds the first index where there is a null value.
+     * Finds the first index where there is a null value in kit.
      *
      * @return index of empty index, or -1 if not found.
      */
@@ -200,4 +235,19 @@ public class Hunter {
         }
         return -1;
     }
+    /**
+     * Finds the first index where there is a null value in treasures.
+     *
+     * @return index of empty index, or -1 if not found.
+     */
+    private int emptyPositionInTreasures() {
+        for (int i = 0; i < treasures.length; i++) {
+            if (treasures[i] == null) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
 }

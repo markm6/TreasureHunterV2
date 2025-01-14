@@ -174,6 +174,31 @@ public class Hunter {
     }
 
     /**
+     * Returns a printable representation of the hunter's treasures, which
+     * is a list of the items in treasures.
+     *
+     * @return The printable String representation of the treasures Array.
+     */
+    public String treasuresInfoString() {
+        String printableTreasures = "Treasures found: " + Colors.YELLOW + "";
+        String space = " ";
+        int items = 0;
+        for (String item : kit) {
+            if (item != null) {
+                items++;
+                printableTreasures += "a " + item + "," + space;
+            }
+        }
+        printableTreasures += Colors.RESET;
+
+        if (items == 0) {
+            return "Treasures found: none";
+        } else {
+            return printableTreasures;
+        }
+    }
+
+    /**
      * @return A string representation of the hunter.
      */
     public String infoString() {

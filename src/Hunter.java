@@ -221,7 +221,7 @@ public class Hunter {
      * Should only be called when initiating test mode.
      */
     public void addTestKit() {
-        kit = new String[]{"water", "rope", "machete", "horse", "boat"};
+        kit = new String[]{"water", "rope", "machete", "horse", "boat", "boots"};
     }
 
     /**
@@ -282,5 +282,7 @@ public class Hunter {
         return -1;
     }
 
-
+    public void setGold(int gold) {
+        this.gold = gold;
+    }
 }

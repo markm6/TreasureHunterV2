@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.Scanner;
 
 /**
@@ -15,6 +16,8 @@ public class Shop {
     private static final int BOAT_COST = 20;
     private static final int BOOTS_COST = 5;
     private static final int SHOVEL_COST = 8;
+    private static final int SWORD_COST = 0;
+    private boolean secretMode;
 
     // static variables
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -28,9 +31,10 @@ public class Shop {
      *
      * @param markdown Percentage of markdown for selling items in decimal format.
      */
-    public Shop(double markdown) {
+    public Shop(double markdown, boolean secretMode) {
         this.markdown = markdown;
         customer = null; // customer is set in the enter method
+        this.secretMode = secretMode;
     }
 
     /**
@@ -90,6 +94,9 @@ public class Shop {
         str += "Boat: " + BOAT_COST + " gold\n";
         str += "Boots: " + BOOTS_COST + " gold\n";
         str += "Shovel: " + SHOVEL_COST + " gold\n";
+        if (secretMode){
+            str += Colors.RED + "S" + Colors.GREEN + "W" + Colors.YELLOW + "O" + Colors.BLUE + "R" + Colors.PURPLE + "D";
+        }
         return str;
     }
 
@@ -102,6 +109,7 @@ public class Shop {
         int costOfItem = checkMarketPrice(item, true);
         if (customer.buyItem(item, costOfItem)) {
             System.out.println("Ye' got yerself a " + item + ". Come again soon.");
+
         } else {
             System.out.println("Hmm, either you don't have enough gold or you've already got one of those!");
         }
@@ -157,6 +165,8 @@ public class Shop {
             return BOOTS_COST;
         } else if (item.equals("shovel")) {
             return SHOVEL_COST;
+        } else if (item.equals("sword")) {
+            return SWORD_COST;
         } else {
             return 0;
         }

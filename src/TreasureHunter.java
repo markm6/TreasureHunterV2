@@ -18,6 +18,7 @@ public class TreasureHunter {
     private boolean hardMode;
     private boolean normalMode;
     private boolean easyMode;
+    private boolean secretMode;
 
     /**
      * Constructs the Treasure Hunter game.
@@ -29,6 +30,7 @@ public class TreasureHunter {
         hardMode = false;
         normalMode = false;
         easyMode = false;
+        secretMode = false;
     }
 
     /**
@@ -66,6 +68,8 @@ public class TreasureHunter {
         } else if (hard.equals("test")) {
             hunter.changeGold(80);
             hunter.addTestKit();
+        } else if (hard.equals("s")){
+            secretMode = true;
         }
     }
 
@@ -85,12 +89,17 @@ public class TreasureHunter {
             markdown = 1.0;
         }
 
-        Shop shop = new Shop(markdown);
-
+        if (secretMode){
+            Shop shop = new Shop(markdown, true);
+            markdown = 1.0;
+            toughness = 0.0;
+            currentTown = new Town(shop, toughness, true, true);
+        }
+        Shop shop = new Shop(markdown, false);
         if(easyMode){
-            currentTown = new Town(shop, toughness, true);
+            currentTown = new Town(shop, toughness, true, false);
         } else {
-            currentTown = new Town(shop, toughness, false);
+            currentTown = new Town(shop, toughness, false, false);
         }
 
         // calling the hunterArrives method, which takes the Hunter

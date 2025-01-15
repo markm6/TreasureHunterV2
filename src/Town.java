@@ -13,6 +13,7 @@ public class Town {
     private boolean toughTown;
     private String treasure;
     private boolean treasureSearched;
+    private boolean goldDug;
 
     /**
      * The Town Constructor takes in a shop and the surrounding terrain, but leaves the hunter as null until one arrives.
@@ -32,6 +33,7 @@ public class Town {
         // higher toughness = more likely to be a tough town
         toughTown = (Math.random() < toughness);
 
+        goldDug = false;
         treasureSearched = false;
 
         // 25% chance for a given treasure to be chosen.
@@ -85,6 +87,25 @@ public class Town {
             }
             treasureSearched = true;
         }
+    }
+
+    public void digForGold() {
+        if (!hunter.hasItemInKit("shovel")) {
+            printMessage = "You can't dig for gold without a shovel.";
+        } else if (goldDug) {
+            printMessage = "You already dug for gold in this town.";
+        } else {
+            double chance = Math.random();
+            if (chance < 0.5) {
+                int goldFound = (int) (Math.random() * 20) + 1;
+                printMessage = "You dug up " + goldFound + " gold!";
+                hunter.changeGold(goldFound);
+            } else {
+                printMessage = "You dug but only found dirt.";
+            }
+            goldDug = true;
+        }
+
     }
 
     /**

@@ -34,6 +34,9 @@ public class TreasureHunter {
         welcomePlayer();
         enterTown();
         showMenu();
+        if (hunter.allTreasuresCollected()) {
+            System.out.println("Congratulations, you have found the last of the three treasures, you win!");
+        }
     }
 
     /**
@@ -101,7 +104,8 @@ public class TreasureHunter {
 
     public void showMenu() {
         String choice = "";
-        while (!choice.equals("x")) {
+        boolean gameOver = false;
+        while (!choice.equals("x") && !hunter.allTreasuresCollected() && !gameOver) {
             if (hunter.getGold() < 0){
                 done();
                 break;
@@ -123,6 +127,7 @@ public class TreasureHunter {
             System.out.print("What's your next move? ");
             choice = SCANNER.nextLine().toLowerCase();
             processChoice(choice);
+
         }
     }
 

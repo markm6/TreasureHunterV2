@@ -183,7 +183,7 @@ public class Hunter {
         String printableTreasures = "Treasures found: " + Colors.YELLOW + "";
         String space = " ";
         int items = 0;
-        for (String item : kit) {
+        for (String item : treasures) {
             if (item != null) {
                 items++;
                 printableTreasures += "a " + item + "," + space;
@@ -196,6 +196,13 @@ public class Hunter {
         } else {
             return printableTreasures;
         }
+    }
+
+    /**
+     *
+     */
+    public boolean allTreasuresCollected() {
+        return hasTreasure("trophy") && hasTreasure("crown") && hasTreasure("gem");
     }
 
     /**

@@ -88,18 +88,19 @@ public class TreasureHunter {
             toughness = 0.2;
             markdown = 1.0;
         }
-
-        if (secretMode){
-            Shop shop = new Shop(markdown, true);
-            markdown = 1.0;
-            toughness = 0.0;
-            currentTown = new Town(shop, toughness, true, true);
-        }
         Shop shop = new Shop(markdown, false);
         if(easyMode){
             currentTown = new Town(shop, toughness, true, false);
         } else {
             currentTown = new Town(shop, toughness, false, false);
+        }
+
+        if (secretMode){
+            shop = new Shop(markdown, true);
+            markdown = 1.0;
+            toughness = 0.0;
+            currentTown = new Town(shop, toughness, true, true);
+            System.out.println(Colors.RED + "shhhhh!" + Colors.RESET);
         }
 
         // calling the hunterArrives method, which takes the Hunter

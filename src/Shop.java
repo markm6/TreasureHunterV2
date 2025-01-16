@@ -53,14 +53,10 @@ public class Shop {
             System.out.print("What're you lookin' to buy? ");
             String item = SCANNER.nextLine().toLowerCase();
             int cost = checkMarketPrice(item, true);
-            if (cost == 0) {
-                System.out.println("We ain't got none of those.");
-            } else {
                 System.out.print("It'll cost you " + cost + " gold. Buy it (y/n)? ");
                 String option = SCANNER.nextLine().toLowerCase();
                 if (option.equals("y")) {
                     buyItem(item);
-                }
             }
         } else {
             System.out.println("What're you lookin' to sell? ");
@@ -95,7 +91,7 @@ public class Shop {
         str += "Boots: " + BOOTS_COST + " gold\n";
         str += "Shovel: " + SHOVEL_COST + " gold\n";
         if (secretMode){
-            str += Colors.RED + "S" + Colors.GREEN + "W" + Colors.YELLOW + "O" + Colors.BLUE + "R" + Colors.PURPLE + "D";
+            str += Colors.RED + "S" + Colors.GREEN + "W" + Colors.YELLOW + "O" + Colors.BLUE + "R" + Colors.PURPLE + "D" + Colors.RESET + ": " + SWORD_COST + " gold\n";
         }
         return str;
     }
@@ -109,7 +105,6 @@ public class Shop {
         int costOfItem = checkMarketPrice(item, true);
         if (customer.buyItem(item, costOfItem)) {
             System.out.println("Ye' got yerself a " + item + ". Come again soon.");
-
         } else {
             System.out.println("Hmm, either you don't have enough gold or you've already got one of those!");
         }
@@ -166,9 +161,12 @@ public class Shop {
         } else if (item.equals("shovel")) {
             return SHOVEL_COST;
         } else if (item.equals("sword")) {
-            return SWORD_COST;
+            if(secretMode == true){
+                return SWORD_COST;
+            }
+            return -1;
         } else {
-            return 0;
+            return -1;
         }
     }
 

@@ -19,7 +19,7 @@ public class Hunter {
      */
     public Hunter(String hunterName, int startingGold) {
         this.hunterName = hunterName;
-        kit = new String[8]; // only 7 possible items can be stored in kit
+        kit = new String[8]; // only 8 possible items can be stored in kit
         treasures = new String[3]; // 3 required treasures to collect
         gold = startingGold;
     }
@@ -50,12 +50,26 @@ public class Hunter {
      * @return true if the item is successfully bought.
      */
     public boolean buyItem(String item, int costOfItem) {
-        if (costOfItem == 0 || gold < costOfItem || hasItemInKit(item)) {
+        if (costOfItem < 0){
+            System.out.println("We don't sell that here!");
             return false;
         }
-        gold -= costOfItem;
-        addItem(item);
-        return true;
+        if (hasItemInKit("sword") && gold < costOfItem){
+            System.out.println(Colors.YELLOW + "0_0. You know, you don't have enough, but don't sweat it haha... it's on the house" + Colors.RESET);
+            addItem(item);
+            return true;
+        } else if (hasItemInKit("sword") && gold >= costOfItem) {
+            System.out.println(Colors.YELLOW + "0_0. Is that a sword. You know what, you can just have it" + Colors.RESET);
+            addItem(item);
+            return true;
+        } else {
+            if (gold < costOfItem || hasItemInKit(item)) {
+                return false;
+            }
+            gold -= costOfItem;
+            addItem(item);
+            return true;
+        }
     }
 
     /**

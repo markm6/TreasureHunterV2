@@ -84,7 +84,7 @@ public class TreasureHunter {
             toughness = 0.75;
         }
         if (easyMode) {
-            hunter.setGold(hunter.getGold() * 2);
+            hunter.setGold(hunter.getGold());
             toughness = 0.2;
             markdown = 1.0;
         }

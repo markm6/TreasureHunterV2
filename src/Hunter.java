@@ -50,6 +50,10 @@ public class Hunter {
      * @return true if the item is successfully bought.
      */
     public boolean buyItem(String item, int costOfItem) {
+        if (hasItemInKit("sword") && item.equals("sword")){
+            System.out.println("SO greedy... YOU ALREADY HAVE ONE");
+            return false;
+        }
         if (costOfItem < 0){
             System.out.println("We don't sell that here!");
             return false;
